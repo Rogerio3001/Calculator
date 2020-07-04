@@ -25,7 +25,26 @@ function CalculatorService(){
         return resultado
     }
 
-    return [ calculate, SUM, SUBS, DIV, MULT ]
+    function concatNumber(actualNumber, numberToConcat){
+        //* caso contenha apenas 0 ou null, reinicia o valor
+        if(actualNumber === '0' || actualNumber === null){
+            actualNumber =  ''
+        }
+        
+        //* primeiro digito for "." concatena o "0" antes do ponto
+        if(numberToConcat === '.' && actualNumber === ''){
+            return '0.'
+        }
+        
+        //* caso "." for digitado e já tenha um "." apenas retornar sem fazer nada
+        if(numberToConcat === '.' && actualNumber.indexOf('.') > -1){
+            return actualNumber
+        }
+
+        return actualNumber + numberToConcat
+    }
+
+    return [ calculate, concatNumber, SUM, SUBS, DIV, MULT ]
 }
 
 export default CalculatorService
